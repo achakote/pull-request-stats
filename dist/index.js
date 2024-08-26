@@ -556,8 +556,8 @@ class OidcClient {
             const res = yield httpclient
                 .getJson(id_token_url)
                 .catch(error => {
-                throw new Error(`Failed to get ID Token. \n 
-        Error Code : ${error.statusCode}\n 
+                throw new Error(`Failed to get ID Token. \n
+        Error Code : ${error.statusCode}\n
         Error Message: ${error.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
@@ -15319,7 +15319,7 @@ exports.assert_logger = function(logger) {
     if (typeof logger !== 'object') {
         throw new TypeError(`"logger" must be a valid Logger object`);
     }
-    
+
     ['trace', 'debug', 'info', 'warn', 'error'].forEach((method) => {
         if (typeof logger[method] !== 'function') {
             throw new TypeError(`Logger object missing "${method}" method`);
@@ -41345,7 +41345,8 @@ module.exports = async (params) => {
 
   const { githubToken, org, repos } = params;
   const octokit = github.getOctokit(githubToken, { baseUrl: getGithubApiUrl() });
-  const isSponsor = await checkSponsorship({ octokit, org, repos });
+  //const isSponsor = await checkSponsorship({ octokit, org, repos });
+  const isSponsor = true;
   const telemetry = new Telemetry({ core, isSponsor, telemetry: params.telemetry });
   if (isSponsor) core.info(t('execution.logs.sponsors'));
 
@@ -41955,9 +41956,10 @@ module.exports = async ({
   org,
   repos,
 }) => {
-  const logins = getLogins({ org, repos });
-  const { user } = await fetchSponsorships({ octokit, logins });
-  return isSponsoring(user) || isExternalSponsor(logins);
+  return  true;
+  // const logins = getLogins({ org, repos });
+  // const { user } = await fetchSponsorships({ octokit, logins });
+  // return isSponsoring(user) || isExternalSponsor(logins);
 };
 
 
@@ -42432,10 +42434,10 @@ module.exports = async ({
     return;
   }
 
-  if (!isSponsor) {
-    core.setFailed(t('integrations.slack.errors.notSponsor'));
-    return;
-  }
+  // if (!isSponsor) {
+  //   core.setFailed(t('integrations.slack.errors.notSponsor'));
+  //   return;
+  // }
 
   const send = (message) => {
     const params = {
@@ -42791,10 +42793,10 @@ module.exports = async ({
     return;
   }
 
-  if (!isSponsor) {
-    core.setFailed(t('integrations.teams.errors.notSponsor'));
-    return;
-  }
+  // if (!isSponsor) {
+  //   core.setFailed(t('integrations.teams.errors.notSponsor'));
+  //   return;
+  // }
 
   const send = (body) => {
     const params = {
@@ -43359,7 +43361,7 @@ class Telemetry {
     this.useTelemetry = !isSponsor || telemetry;
     this.tracker = this.useTelemetry ? buildTracker() : null;
     if (!this.useTelemetry) core.debug('Telemetry disabled correctly');
-    if (!telemetry && !isSponsor) core.setFailed('Disabling telemetry is a premium feature, available to sponsors.');
+  //  if (!telemetry && !isSponsor) core.setFailed('Disabling telemetry is a premium feature, available to sponsors.');
   }
 
   start(params) {
@@ -44827,7 +44829,7 @@ function buildURL(url, params, options) {
   if (!params) {
     return url;
   }
-  
+
   const _encode = options && options.encode || encode;
 
   const serializeFn = options && options.serialize;
@@ -46164,7 +46166,7 @@ class ZlibHeaderTransformStream extends stream__default["default"].Transform {
       if (chunk[0] !== 120) { // Hex: 78
         const header = Buffer.alloc(2);
         header[0] = 120; // Hex: 78
-        header[1] = 156; // Hex: 9C 
+        header[1] = 156; // Hex: 9C
         this.push(header, encoding);
       }
     }
@@ -48095,7 +48097,7 @@ module.exports = JSON.parse('{"title":"Pull reviewers stats","icon":"https://s3.
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __nccwpck_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -48109,7 +48111,7 @@ module.exports = JSON.parse('{"title":"Pull reviewers stats","icon":"https://s3.
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		var threw = true;
 /******/ 		try {
@@ -48118,16 +48120,16 @@ module.exports = JSON.parse('{"title":"Pull reviewers stats","icon":"https://s3.
 /******/ 		} finally {
 /******/ 			if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 		}
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat */
-/******/ 	
+/******/
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.

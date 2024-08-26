@@ -1,5 +1,4 @@
 const axios = require('axios').default;
-
 module.exports = ({
   webhook,
   message,

@@ -8,7 +8,8 @@ module.exports = async ({
   org,
   repos,
 }) => {
-  const logins = getLogins({ org, repos });
-  const { user } = await fetchSponsorships({ octokit, logins });
-  return isSponsoring(user) || isExternalSponsor(logins);
+  return true;
+  // const logins = getLogins({ org, repos });
+  // const { user } = await fetchSponsorships({ octokit, logins });
+  // return isSponsoring(user) || isExternalSponsor(logins);
 };
